@@ -1,12 +1,18 @@
 <template>
   <div id="app">
     <router-view/>
+    <hr>
+    <ShoppingCart />
   </div>
 </template>
 
 <script>
+import ShoppingCart from './components/ShoppingCart'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    ShoppingCart
+  }
 }
 </script>
 
