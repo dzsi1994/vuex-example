@@ -12,8 +12,10 @@ export default new Vuex.Store({
   },
 
   getters: { // computed properties
-    productsCount () {
-      // length of productsArray
+    productsIsInStock () {
+      return (product) => {
+        return product.inventory > 0
+      }
     },
     availableProducts (state, getters) {
       return state.products.filter(product => product.inventory > 0)
@@ -47,9 +49,10 @@ export default new Vuex.Store({
     },
     addProductToCart ({
       commit,
+      getters,
       state
     }, product) {
-      if (product.inventory > 0) {
+      if (getters.productsIsInStock(product)) {
         const cartItem = state.cart.find(item => item.id === product.id)
         if (!cartItem) {
           commit('pushProductToCart', product.id)
